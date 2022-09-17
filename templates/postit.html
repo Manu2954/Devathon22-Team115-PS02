@@ -1,0 +1,157 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+        <link rel="stylesheet" href="{% static 'assets1/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'assets1/css/form-elements.css' %}">
+        <link rel="stylesheet" href="{% static 'assets1/css/style.css' %}">
+
+        <title>Announcement</title>
+
+    </head>
+
+    <body>
+        <nav class="navbar navbar-inverse">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="#">
+              <img src="{% static 'assets1/img/cs.png' %}" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+              <a class="navbar-brand" href="#">ClubSpace</a>
+              </a>
+            </div>
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Home</a></li>
+            </ul>
+            <a class="btn btn-link-1 launch-modal" href="#" data-modal-id="modal-register">New post</a>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="logout"><span class="glyphicon glyphicon-user"></span>Log out</a></li>
+            </ul>
+          </div>
+        </nav>
+        {% for post in posts %}
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="100">
+              <div class="feature-block">
+                <img src="{{post.image.url}}" alt="img">
+                venue = {{post.venue}} <br>
+
+              </div>
+            </div>
+            </div>
+          </div>
+{%endfor%}
+
+        <div class="modal fade" id="modal-register" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                  <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                </button>
+                <h3 class="modal-title" id="modal-register-label">New announcement</h3>
+                <p>Please fill the details:</p>
+              </div>
+              
+              <div class="modal-body">
+                
+          <form id="bookingForm" action="upload"  enctype="multipart/form-data" method="post" class="needs-validation" autocomplete="off">
+            {% csrf_token %}
+        <div class="form-group">
+          <label for="inputName">Title</label>
+          <input type="text" action="upload" class="form-control" id="inputName" name="eventname" placeholder="Your name" required />
+          <small class="form-text text-muted">Title of the event/announcement</small>
+        </div>
+
+        <div class="form-group">
+          <label for="inputName">Poster</label>
+          <input type="file" class="form-control" id="inputImage" name="img"  required />
+          <small class="form-text text-muted">Title of the event/announcement</small>
+        </div>
+
+
+        <div class="form-group">
+          <label for="inputEmail">Email</label>
+          <input type="email" class="form-control" id="inputEmail" name="cntemail" placeholder="Enter email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required />
+          <small class="form-text text-muted">Please provide an email</small>
+        </div>
+
+        <div class="form-group">
+          <label for="inputPhone">Contact</label>
+          <input type="tel" class="form-control" id="inputPhone" name="phone" placeholder="099xxxxxxx" pattern="\d{3}\d{3}\d{4}" required />
+          <small class="form-text text-muted">Whom to contact?</small>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="inputDate">Date</label>
+            <input type="date" class="form-control" id="inputDate" name="sdate" required />
+            <small class="form-text text-muted">Please choose date and time for the event</small>
+          </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="inputDate">Deadline</label>
+            <input type="date" class="form-control" id="inputDate" name="date" required />
+            <small class="form-text text-muted">Please choose a deadline</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <input type="text" class="form-control" id="inputName" name="venue" placeholder="Venue" required />
+          <small class="form-text text-muted">Enter venue details</small>
+        </div>
+
+        <div class="form-group">
+          <legend class="col-form-label pt-0">Choose event type</legend>
+          <div class="form-check form-check-inline">
+            <input type="radio" class="form-check-input" id="inlineRadioType1" name="roomType" value="type1" required />
+            <label class="form-check-label" for="inlineRadioType1">Tech Event/Hackathon</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" class="form-check-input" id="inlineRadioType2" name="roomType" value="type2" required />
+            <label class="form-check-label" for="inlineRadioType2">Career Event</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" class="form-check-input" id="inlineRadioType3" name="roomType" value="type3" required />
+            <label class="form-check-label" for="inlineRadioType3">Workshop</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" class="form-check-input" id="inlineRadioType3" name="roomType" value="type3" required />
+            <label class="form-check-label" for="inlineRadioType3">Quiz Event</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="radio" class="form-check-input" id="inlineRadioType4" name="roomType" value="type4" required />
+            <label class="form-check-label" for="inlineRadioType4">Social Event</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="textAreaRemark">Details</label>
+          <textarea class="form-control" name="des" id="textAreaRemark" rows="2" placeholder="Details about the event..."></textarea>
+        </div>
+        <input value="Submit" class="btn btn-primary btn-block col-lg-2" type="submit">
+      </form>
+                      
+              </div>
+              
+            </div>
+          </div>
+        </div>
+
+        <script src="{% static 'assets1/js/jquery-1.11.1.min.js' %}"></script>
+        <script src="{% static 'assets1/bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'assets1/js/jquery.backstretch.min.js' %}"></script>
+        <script src="{% static 'assets1/js/scripts.js' %}"></script>
+hello
+    </body>
+
+</html>
